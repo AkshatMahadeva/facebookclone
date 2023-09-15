@@ -61,23 +61,23 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const userPosts = async () => {
-          const res = await fetch(rootUrl + `/post/user/${id}`, {
-            method: "GET",
-            headers: {
-              token: token
+            const res = await fetch(rootUrl + `/post/user/${id}`, {
+                method: "GET",
+                headers: {
+                    token: token
+                }
+            })
+            const data = await res.json()
+            if (res.ok) {
+                // console.log(data);
+                setPosts(data)
+                dispatch(setRefresh(false))
+            } else {
+                console.log(data);
             }
-          })
-          const data = await res.json()
-          if (res.ok) {
-            // console.log(data);
-            setPosts(data)
-            dispatch(setRefresh(false))
-          } else {
-            console.log(data);
-          }
         }
         userPosts()
-      }, [refresh, id])
+    }, [refresh, id])
 
     return (
         <>{user ?
@@ -90,7 +90,7 @@ const ProfilePage = () => {
                     </Box>
                 </Box>
                 <Box flex={"40%"}>
-                    <UserPosts posts={posts}/>
+                    <UserPosts posts={posts} />
                 </Box>
 
                 <Box flex={"25%"} display={{ sm: "none", lg: "block", xs: "none" }}>
@@ -98,7 +98,7 @@ const ProfilePage = () => {
                 </Box>
             </Box>
             :
-            <Box sx={{ textAlign: "center", mt: "40%" }}>
+            <Box sx={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
                 <CircularProgress />
             </Box>
         }

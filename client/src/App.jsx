@@ -18,6 +18,7 @@ const App = () => {
   const rootUrl = useSelector((state) => state.rootApi);
   const auth = useSelector((state) => state.auth);
   const token = useSelector((state) => state.token);
+  const posts = useSelector(state => state.posts)
   const navigator = useNavigate();
   const refresh = useSelector((state) => state.refresh);
 
@@ -79,7 +80,7 @@ const App = () => {
       }
     };
     getPosts();
-  }, [refresh]);
+  }, [refresh, posts]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,12 +92,13 @@ const App = () => {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/:id" element={<ProfilePage />} />
+              <Route path='*' element={<Home />} />
             </>
           ) : (
             <>
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Login />} />
+              {!token && <Route path="*" element={<Login />} />}
             </>
           )}
         </Routes>

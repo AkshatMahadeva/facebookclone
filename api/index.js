@@ -14,10 +14,10 @@ app.use(express.static("uploads"))
 app.use("/api/user", UserRouter)
 app.use("/api/post", PostRouter)
 
-app.get("/", (req, res)=>{
+app.get("/", (req, res) => {
     res.send("This is facebook api")
 })
 
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT, () => {
     console.log("app is running on ", process.env.PORT);
 })

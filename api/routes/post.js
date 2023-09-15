@@ -27,13 +27,13 @@ PostRouter.get("/all", getAuth, async (req, res) => {
 })
 
 PostRouter.get("/user/:userId", getAuth, async (req, res) => {
-    await Post.find({ user: req.params.userId }).populate({path: 'comments', populate: {path: "user", select: "-password"}}).populate("user", "-password")
+    await Post.find({ user: req.params.userId }).populate({ path: 'comments', populate: { path: "user", select: "-password" } }).populate("user", "-password")
         .then(result => Response(res, 200, result))
         .catch(err => Response(res, 400, { error: err }))
 })
 
 PostRouter.get("/:postId", getAuth, async (req, res) => {
-    await Post.findById(req.params.postId).populate({path: 'comments', populate: {path: "user", select: "-password"}}).populate("user", "-password")
+    await Post.findById(req.params.postId).populate({ path: 'comments', populate: { path: "user", select: "-password" } }).populate("user", "-password")
         .then(result => Response(res, 200, result))
         .catch(err => Response(res, 400, { error: err }))
 })

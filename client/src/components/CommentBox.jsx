@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FavoriteBorder } from "@mui/icons-material"
-import { Avatar, Box, Button, Card, CardActions, Checkbox, IconButton, InputBase, Modal, Typography } from '@mui/material'
+import { Avatar, Box, Button, Card, CardActions, Checkbox, Divider, IconButton, InputBase, Modal, Typography } from '@mui/material'
 import styled from '@emotion/styled'
 import FlexBetween from "../styles/FlexBetween"
 import moment from "moment"
@@ -13,11 +13,11 @@ import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@emotion/react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addComment, deleteComment, setRefresh } from '../store/reducers/modeReducer'
+import { Link } from 'react-router-dom'
 
 const Comments = styled(Box)({
     display: "flex",
     backgroundColor: "transparent",
-    justifyContent: "space-between"
 })
 
 function CommentMenu({ id, postId }) {
@@ -92,9 +92,9 @@ const DisplayComments = (props) => {
     // const rootApi = useSelector(state=>state.rootApi)
     const auth = useSelector(state => state.auth)
     return (
-        <Card sx={{ display: "flex", flexDirection: "column", gap: 2, boxShadow: "none", fontSize: { sm: "13px", xs: "12px", lg: "15px" }, width: "100%" }} key={_id}>
+        <Card sx={{ display: "flex", my:2, flexDirection: "column", gap: 1, boxShadow: "none", fontSize: { sm: "13px", xs: "12px", lg: "15px" }, width: "100%" }} key={_id}>
             <Comments gap={3}>
-                <Avatar src={`http://localhost:2000/${user.logo}`} />
+                <Link to={"/"+user._id}><Avatar src={`http://localhost:2000/${user.logo}`} /></Link>
                 <Box sx={{ mr: "auto" }}>
                     <FlexBetween><Typography variant='p'>{user.name}.</Typography><Typography variant='body2' color={"text.secondary"}>{moment(createdAt).fromNow()}</Typography></FlexBetween>
                     <Typography variant='body'>{comment}</Typography>
@@ -138,6 +138,7 @@ const CommentPost = ({ id }) => {
         if (res.ok) {
             console.log(data);
             dispatch(setRefresh(true))
+            setComment("")
         } else {
             console.log(data);
         }
@@ -151,7 +152,6 @@ const CommentPost = ({ id }) => {
                     <Button endIcon={<SendIcon />} color="info" onClick={handleSubmit}>send</Button>
                 </Box>
             </Box>
-
         </Box>
     )
 }
@@ -174,7 +174,7 @@ const CommentBox = ({ comments, postId }) => {
         py: 4,
         display: "flex",
         flexDirection: "column",
-        gap: 3,
+        gap: 2,
         maxHeight: "500px",
         borderRadius: 3,
     };

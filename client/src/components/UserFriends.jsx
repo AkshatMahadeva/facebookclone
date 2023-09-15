@@ -22,7 +22,7 @@ const UserFriends = ({ title, friends }) => {
       )) : (
         <Typography variant='p' ml={2}>No {title} yet</Typography>
       )}
-      {friends && friends.length > 3 &&
+      {friends && friends.length > 4 &&
         <Button onClick={handleMore}>more...</Button>
       }
     </Card>

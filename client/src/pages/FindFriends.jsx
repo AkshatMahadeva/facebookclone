@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 
 const FindFriends = () => {
   const friends = useSelector(state=>state.findFriends)
-  const [more, setMore] = useState(6)
+  const [more, setMore] = useState(5)
 
   const handleMore = () => {
     setMore(prev => prev + 3)
@@ -22,7 +22,7 @@ const FindFriends = () => {
       {friends && friends.length !== 0 && friends.slice(0, more).map(friend => (
         <FriendCard friend={friend} key={friend._id} />
       ))}
-      {friends && 
+      {friends && friends.length > 5 &&
         <Button onClick={handleMore}>more...</Button>
       }
     </Card>

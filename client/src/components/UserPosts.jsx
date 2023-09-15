@@ -1,8 +1,6 @@
 import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import PostCard from '../components/PostCard'
-import { setRefresh } from '../store/reducers/modeReducer'
 
 const UserPosts = ({posts}) => {
 
